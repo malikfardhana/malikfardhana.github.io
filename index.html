@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Rasa — Desainer Grafis Lepas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF8F4;
+    --bg-alt: #F0EAE0;
+    --ink: #1B1A16;
+    --ink-soft: #6B665C;
+    --line: #DAD2C1;
+    --primary: #FF5A1F;
+    --primary-ink: #FFFFFF;
+    --card: #FFFFFF;
+    --focus: #1B1A16;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg: #16140F;
+      --bg-alt: #1F1B14;
+      --ink: #F3EEE3;
+      --ink-soft: #B6AE9E;
+      --line: #362F23;
+      --primary: #FF6A32;
+      --primary-ink: #16140F;
+      --card: #1C1810;
+      --focus: #F3EEE3;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16140F;
+    --bg-alt: #1F1B14;
+    --ink: #F3EEE3;
+    --ink-soft: #B6AE9E;
+    --line: #362F23;
+    --primary: #FF6A32;
+    --primary-ink: #16140F;
+    --card: #1C1810;
+    --focus: #F3EEE3;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  .wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 48px);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .hairline { border: none; border-top: 1px solid var(--line); margin: 0; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  /* ---- Header ---- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+  .brand {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .brand span { color: var(--primary); }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: var(--primary-ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 10px 18px;
+    border-radius: 2px;
+  }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+  }
+  .nav-toggle span,
+  .nav-toggle span::before,
+  .nav-toggle span::after {
+    content: "";
+    position: absolute;
+    left: 11px;
+    width: 20px;
+    height: 2px;
+    background: var(--ink);
+    transition: transform 0.2s ease, opacity 0.2s ease, top 0.2s ease;
+  }
+  .nav-toggle span { top: 20px; }
+  .nav-toggle span::before { top: -6px; }
+  .nav-toggle span::after { top: 6px; }
+  .nav-toggle[aria-expanded="true"] span { background: transparent; }
+  .nav-toggle[aria-expanded="true"] span::before { top: 0; transform: rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span::after { top: 0; transform: rotate(-45deg); }
+
+  .mobile-panel {
+    display: none;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .mobile-panel.open { display: block; }
+  .mobile-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+  }
+  .mobile-panel a {
+    display: block;
+    padding: 14px 0;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-panel a:last-child { border-bottom: none; }
+  .mobile-panel .nav-cta { display: inline-flex; margin-top: 16px; }
+
+  @media (max-width: 760px) {
+    .nav-links, header .nav > .nav-cta { display: none; }
+    .nav-toggle { display: inline-block; }
+  }
+  @media (min-width: 761px) {
+    .mobile-panel { display: none !important; }
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    padding: clamp(56px, 10vw, 110px) 0 clamp(48px, 8vw, 80px);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 5px 12px;
+    margin-bottom: 28px;
+  }
+  .hero-tag strong { color: var(--primary); font-weight: 600; }
+  .hero h1 {
+    font-size: clamp(2.4rem, 6.2vw, 5rem);
+    line-height: 0.98;
+    max-width: 14ch;
+  }
+  .hero h1 .accent { color: var(--primary); }
+  .hero-sub {
+    max-width: 46ch;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    margin-top: 24px;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 36px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 14px 24px;
+    border-radius: 2px;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary { background: var(--primary); color: var(--primary-ink); }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-outline { border: 1px solid var(--line); color: var(--ink); }
+  .btn-outline:hover { border-color: var(--ink-soft); }
+
+  .hero-specs {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--line);
+  }
+  .hero-specs div {
+    padding: 20px 0 0;
+    border-right: 1px solid var(--line);
+  }
+  .hero-specs div:last-child { border-right: none; }
+  .hero-specs .num {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+    font-size: 1.9rem;
+  }
+  .hero-specs .label {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+  @media (max-width: 640px) {
+    .hero-specs { grid-template-columns: 1fr; }
+    .hero-specs div { border-right: none; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+  }
+
+  /* ---- Section shell ---- */
+  section { padding: clamp(56px, 9vw, 96px) 0; }
+  section + section { border-top: 1px solid var(--line); }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 44px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); max-width: 16ch; }
+  .section-head p { color: var(--ink-soft); max-width: 40ch; margin: 0; }
+
+  /* ---- About ---- */
+  .about {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+  }
+  .about-body p { font-size: 1.05rem; color: var(--ink-soft); max-width: 52ch; }
+  .about-body p + p { margin-top: 16px; }
+  .spec-list { border-top: 1px solid var(--line); }
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+  .spec-row .k { color: var(--ink-soft); }
+  .spec-row .v { font-weight: 600; text-align: right; }
+  @media (max-width: 820px) {
+    .about { grid-template-columns: 1fr; }
+  }
+
+  /* ---- Work grid ---- */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+  }
+  .work-card {
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    background: var(--card);
+    grid-column: span 3;
+  }
+  .work-card.wide { grid-column: span 4; }
+  .work-card.narrow { grid-column: span 2; }
+  .work-thumb {
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--bg-alt) 130%);
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+  .work-card.narrow .work-thumb { aspect-ratio: 3 / 4; }
+  .work-thumb span {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+    color: var(--primary-ink);
+    font-size: 0.8rem;
+  }
+  .work-meta { padding: 16px 18px 20px; }
+  .work-meta .cat { font-size: 0.78rem; color: var(--ink-soft); }
+  .work-meta h3 { font-size: 1.05rem; margin-top: 6px; font-weight: 700; }
+  @media (max-width: 820px) {
+    .work-grid { grid-template-columns: repeat(2, 1fr); }
+    .work-card, .work-card.wide, .work-card.narrow { grid-column: span 1; }
+  }
+
+  /* ---- Services ---- */
+  .service-list { border-top: 1px solid var(--line); }
+  .service-row {
+    display: grid;
+    grid-template-columns: 1.4fr 2fr auto;
+    gap: 24px;
+    align-items: baseline;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .service-row h3 { font-size: 1.2rem; font-family: 'Inter'; font-weight: 600; }
+  .service-row p { margin: 6px 0 0; color: var(--ink-soft); font-size: 0.95rem; max-width: 48ch; }
+  .service-row .price {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    text-align: right;
+  }
+  .service-row .price small { display: block; color: var(--ink-soft); font-size: 0.72rem; font-weight: 500; font-family: 'Inter'; }
+  @media (max-width: 680px) {
+    .service-row { grid-template-columns: 1fr; gap: 6px; }
+    .service-row .price { text-align: left; }
+  }
+
+  /* ---- Testimonials ---- */
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .testi-card {
+    background: var(--bg);
+    padding: 32px 28px;
+  }
+  .testi-card p.quote {
+    font-size: 1.05rem;
+    margin: 0;
+  }
+  .testi-who {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.88rem;
+  }
+  .testi-who .name { font-weight: 600; }
+  .testi-who .role { color: var(--ink-soft); }
+  @media (max-width: 820px) {
+    .testi-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---- Contact ---- */
+  .contact {
+    background: var(--primary);
+    color: var(--primary-ink);
+    border-radius: 2px;
+    padding: clamp(40px, 7vw, 72px);
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .contact h2 { color: var(--primary-ink); font-size: clamp(1.8rem, 4vw, 2.6rem); max-width: 14ch; }
+  .contact p { color: color-mix(in srgb, var(--primary-ink) 82%, transparent); max-width: 40ch; margin-top: 14px; }
+  .contact-actions { display: flex; flex-direction: column; gap: 12px; }
+  .contact-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: color-mix(in srgb, var(--primary-ink) 12%, transparent);
+    color: var(--primary-ink);
+    text-decoration: none;
+    padding: 16px 20px;
+    border-radius: 2px;
+    font-weight: 600;
+    border: 1px solid color-mix(in srgb, var(--primary-ink) 30%, transparent);
+    transition: background 0.15s ease;
+  }
+  .contact-btn:hover { background: color-mix(in srgb, var(--primary-ink) 20%, transparent); }
+  .contact-btn small { display: block; font-weight: 400; opacity: 0.75; font-size: 0.78rem; margin-top: 2px; }
+  @media (max-width: 720px) {
+    .contact { grid-template-columns: 1fr; }
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    padding: 32px 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+  footer .socials { display: flex; gap: 18px; }
+  footer a { text-decoration: none; color: var(--ink-soft); }
+  footer a:hover { color: var(--ink); }
+
+  /* ---- Reveal-once hero motion ---- */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-reveal {
+      animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .hero-reveal:nth-child(2) { animation-delay: 0.08s; }
+    .hero-reveal:nth-child(3) { animation-delay: 0.16s; }
+    .hero-reveal:nth-child(4) { animation-delay: 0.24s; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">Studio<span>Rasa</span></a>
+    <ul class="nav-links">
+      <li><a href="#karya">Karya</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#layanan">Layanan</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/62812xxxxxxx" target="_blank" rel="noopener">Hubungi via WA</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobilePanel" aria-label="Buka menu navigasi">
+      <span></span>
+    </button>
+  </div>
+  <div class="mobile-panel wrap" id="mobilePanel">
+    <ul>
+      <li><a href="#karya">Karya</a></li>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#layanan">Layanan</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
+    </ul>
+    <a class="nav-cta" href="https://wa.me/62812xxxxxxx" target="_blank" rel="noopener">Hubungi via WA</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-tag hero-reveal">Tersedia untuk proyek baru — <strong>slot Q1 masih ada</strong></div>
+      <h1 class="hero-reveal">Desain yang bikin brand kamu <span class="accent">diingat</span>, bukan sekadar dilihat.</h1>
+      <p class="hero-sub hero-reveal">Desainer grafis lepas yang fokus di branding &amp; logo, konten sosial media, serta print &amp; packaging — membantu bisnis kecil dan menengah tampil rapi dan konsisten di setiap titik sentuh.</p>
+      <div class="hero-actions hero-reveal">
+        <a class="btn btn-primary" href="#karya">Lihat karya</a>
+        <a class="btn btn-outline" href="#kontak-section">Diskusi proyek</a>
+      </div>
+      <div class="hero-specs">
+        <div><div class="num">40+</div><div class="label">Proyek selesai</div></div>
+        <div><div class="num">5</div><div class="label">Tahun pengalaman</div></div>
+        <div><div class="num">3</div><div class="label">Fokus layanan</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tentang">
+    <div class="wrap about">
+      <div class="about-body">
+        <h2 style="margin-bottom:20px;">Tentang saya</h2>
+        <p>Saya desainer grafis lepas yang percaya desain yang baik itu sederhana, jelas, dan bekerja untuk bisnisnya — bukan cuma indah dipandang. Setiap proyek dimulai dari memahami audiens dan tujuan klien sebelum menyentuh warna atau bentuk.</p>
+        <p>Placeholder bio — ganti dengan cerita singkat tentang perjalanan, cara kerja, dan hal yang bikin pendekatan desainmu berbeda.</p>
+      </div>
+      <div class="spec-list">
+        <div class="spec-row"><span class="k">Berbasis di</span><span class="v">Indonesia</span></div>
+        <div class="spec-row"><span class="k">Fokus</span><span class="v">Branding, sosmed, print &amp; packaging</span></div>
+        <div class="spec-row"><span class="k">Alat kerja</span><span class="v">Figma, Illustrator, Photoshop</span></div>
+        <div class="spec-row"><span class="k">Cara kerja</span><span class="v">Remote, kolaboratif</span></div>
+        <div class="spec-row"><span class="k">Waktu respons</span><span class="v">&lt; 24 jam</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="karya">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Karya terpilih</h2>
+        <p>Placeholder proyek — ganti dengan tangkapan layar atau foto hasil desain aslimu.</p>
+      </div>
+      <div class="work-grid">
+        <a href="#" class="work-card wide"><div class="work-thumb"><span>Ganti gambar proyek</span></div><div class="work-meta"><div class="cat">Branding &amp; Logo</div><h3>Identitas Kopi Nusa</h3></div></a>
+        <a href="#" class="work-card narrow"><div class="work-thumb"><span>Ganti gambar proyek</span></div><div class="work-meta"><div class="cat">Print &amp; Packaging</div><h3>Kemasan Snack Ranting</h3></div></a>
+        <a href="#" class="work-card narrow"><div class="work-thumb"><span>Ganti gambar proyek</span></div><div class="work-meta"><div class="cat">Sosial Media</div><h3>Konten Ramadan — Klinik Sehat</h3></div></a>
+        <a href="#" class="work-card wide"><div class="work-thumb"><span>Ganti gambar proyek</span></div><div class="work-meta"><div class="cat">Branding &amp; Logo</div><h3>Rebrand Griya Laundry</h3></div></a>
+        <a href="#" class="work-card"><div class="work-thumb"><span>Ganti gambar proyek</span></div><div class="work-meta"><div class="cat">Sosial Media</div><h3>Campaign Launching Produk</h3></div></a>
+        <a href="#" class="work-card"><div class="work-thumb"><span>Ganti gambar proyek</span></div><div class="work-meta"><div class="cat">Print &amp; Packaging</div><h3>Katalog UMKM Batik</h3></div></a>
+        <a href="#" class="work-card"><div class="work-thumb"><span>Ganti gambar proyek</span></div><div class="work-meta"><div class="cat">Branding &amp; Logo</div><h3>Logo Studio Yoga Ruang</h3></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="layanan">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Layanan &amp; harga</h2>
+        <p>Harga mulai dari — sesuaikan dengan cakupan dan kompleksitas proyekmu.</p>
+      </div>
+      <div class="service-list">
+        <div class="service-row">
+          <h3>Branding &amp; Logo</h3>
+          <p>Riset arah desain, logo utama + variasi, panduan warna dan tipografi dasar.</p>
+          <div class="price">Rp1.500.000<small>mulai dari</small></div>
+        </div>
+        <div class="service-row">
+          <h3>Konten Sosial Media</h3>
+          <p>Paket desain feed, story, atau campaign bulanan sesuai gaya brand.</p>
+          <div class="price">Rp750.000<small>per paket / bulan</small></div>
+        </div>
+        <div class="service-row">
+          <h3>Print &amp; Packaging</h3>
+          <p>Desain kemasan, brosur, katalog, atau materi cetak siap produksi.</p>
+          <div class="price">Rp1.200.000<small>mulai dari</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimoni">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Kata klien</h2>
+        <p>Placeholder testimoni — ganti dengan ulasan nyata dari klien sebelumnya.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p class="quote">"Prosesnya cepat dan komunikatif. Hasil logo baru langsung dipakai di semua materi promosi kami."</p>
+          <div class="testi-who"><span class="name">Nama Klien</span><span class="role">Pemilik, Nama Usaha</span></div>
+        </div>
+        <div class="testi-card">
+          <p class="quote">"Desain kemasannya bikin produk kami kelihatan jauh lebih premium di rak toko."</p>
+          <div class="testi-who"><span class="name">Nama Klien</span><span class="role">Pemilik, Nama Usaha</span></div>
+        </div>
+        <div class="testi-card">
+          <p class="quote">"Selalu tepat waktu dan hasil revisinya sesuai brief. Jadi langganan tiap ada kebutuhan desain."</p>
+          <div class="testi-who"><span class="name">Nama Klien</span><span class="role">Pemilik, Nama Usaha</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak-section">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <h2>Ada proyek yang mau dikerjakan bareng?</h2>
+          <p>Ceritakan kebutuhanmu — biasanya saya balas dalam waktu kurang dari 24 jam.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="contact-btn" href="https://wa.me/62812xxxxxxx" target="_blank" rel="noopener">WhatsApp<small>Balas paling cepat di sini</small></a>
+          <a class="contact-btn" href="mailto:halo@studiorasa.id">Email<small>halo@studiorasa.id</small></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Studio Rasa. Semua hak dilindungi.</span>
+  <div class="socials">
+    <a href="#" target="_blank" rel="noopener">Instagram</a>
+    <a href="#" target="_blank" rel="noopener">Behance</a>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var toggle = document.getElementById('navToggle');
+    var panel = document.getElementById('mobilePanel');
+    if (!toggle || !panel) return;
+
+    function closePanel() {
+      panel.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    function togglePanel() {
+      var isOpen = panel.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    toggle.addEventListener('click', togglePanel);
+    panel.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closePanel);
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 760) closePanel();
+    });
+  })();
+</script>
+</body>
+</html>
