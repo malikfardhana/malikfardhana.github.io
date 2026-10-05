@@ -827,3 +827,32 @@ window.addEventListener(
 
 
 updateGradientBackground();
+
+
+/* =========================================
+   FROZEN GLASS NAVBAR
+========================================= */
+
+const siteHeader = document.querySelector(".site-header");
+let headerScrollTicking = false;
+
+function updateHeaderOnScroll() {
+  if (siteHeader) {
+    siteHeader.classList.toggle("is-scrolled", window.scrollY > 24);
+  }
+  headerScrollTicking = false;
+}
+
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!headerScrollTicking) {
+      headerScrollTicking = true;
+      requestAnimationFrame(updateHeaderOnScroll);
+    }
+  },
+  { passive: true }
+);
+
+updateHeaderOnScroll();
+

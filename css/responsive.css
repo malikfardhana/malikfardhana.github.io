@@ -1379,3 +1379,340 @@
     border-radius: 18px;
   }
 }
+
+
+/* =========================================
+   MOBILE PROJECT DETAIL SWIPE
+   Keep project details compact on phones.
+========================================= */
+
+@media (max-width: 1024px) {
+
+  /* Compact header inside opened project */
+  .project-detail-stage {
+    margin-top: 24px;
+  }
+
+  .project-detail-stage .carousel-project-detail > .project-detail-inner {
+    padding: 22px 12px 0;
+  }
+
+  .detail-hero {
+    gap: 22px;
+    padding: 34px 0 26px;
+  }
+
+  .detail-hero > p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* Facts become a swipe row instead of a long vertical list */
+  .detail-facts {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 14px 2px 18px;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .detail-facts::-webkit-scrollbar {
+    display: none;
+  }
+
+  .detail-facts > div {
+    flex: 0 0 72%;
+    min-width: 0;
+    scroll-snap-align: start;
+    padding: 15px;
+    border: 1px solid rgba(118,158,235,.12);
+    border-radius: 16px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(20,31,53,.68),
+        rgba(9,15,27,.76)
+      );
+  }
+
+  /* Main project gallery becomes horizontal swipe */
+  .detail-gallery {
+    position: relative;
+    display: flex !important;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-top: 24px;
+    padding: 4px 2px 16px;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .detail-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .detail-gallery::before {
+    content: "SWIPE →";
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 4;
+    padding: 8px 11px;
+    border: 1px solid rgba(149,181,255,.20);
+    border-radius: 999px;
+    background: rgba(7,13,24,.58);
+    color: #dce7ff;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .13em;
+    pointer-events: none;
+  }
+
+  .detail-gallery img,
+  .detail-gallery .wide {
+    flex: 0 0 84%;
+    width: 84%;
+    min-width: 0;
+    max-width: none;
+    aspect-ratio: 4 / 5 !important;
+    grid-column: auto !important;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    border: 1px solid rgba(118,158,235,.10);
+    box-shadow:
+      0 18px 48px rgba(0,0,0,.34),
+      inset 0 1px 0 rgba(255,255,255,.02);
+  }
+
+  /* Keep the overview concise */
+  .detail-story {
+    margin: 34px 0 20px;
+    padding-top: 24px;
+  }
+
+  .detail-story p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* Azka document sections stay stacked by category,
+     but every document row swipes sideways. */
+  .azka-docs {
+    margin-top: 38px;
+    padding-top: 26px;
+  }
+
+  .docs-header {
+    margin-bottom: 24px;
+  }
+
+  .docs-group {
+    margin-top: 28px;
+    padding-top: 18px;
+  }
+
+  .docs-grid,
+  .docs-grid-4,
+  .docs-grid-7 {
+    position: relative;
+    display: flex !important;
+    gap: 14px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 2px 16px;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .docs-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .docs-grid::before {
+    content: "SWIPE →";
+    position: sticky;
+    left: calc(100% - 74px);
+    top: 10px;
+    z-index: 5;
+    align-self: flex-start;
+    flex: 0 0 0;
+    width: 0;
+    height: 0;
+    white-space: nowrap;
+    padding: 7px 10px;
+    border: 1px solid rgba(149,181,255,.20);
+    border-radius: 999px;
+    background: rgba(7,13,24,.64);
+    color: #dce7ff;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    pointer-events: none;
+  }
+
+  .doc-page {
+    flex: 0 0 min(76vw, 315px);
+    max-width: 315px;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .doc-page img,
+  .doc-page figcaption {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .doc-page img {
+    border-radius: 16px;
+    box-shadow:
+      0 18px 46px rgba(0,0,0,.38),
+      0 0 0 1px rgba(79,131,255,.03);
+  }
+
+  /* Touch feedback, because phones have no hover despite humanity insisting
+     on calling everything "hover". */
+  .detail-gallery img:active,
+  .doc-page img:active,
+  .detail-facts > div:active {
+    transform: scale(.985);
+  }
+}
+
+@media (max-width: 560px) {
+  .detail-facts > div {
+    flex-basis: 78%;
+  }
+
+  .detail-gallery img,
+  .detail-gallery .wide {
+    flex-basis: 88%;
+    width: 88%;
+  }
+
+  .docs-group-head {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .docs-meta {
+    gap: 7px;
+  }
+
+  .doc-page {
+    flex-basis: 82%;
+    max-width: 300px;
+  }
+}
+
+/* Mobile WebKit navbar fallback */
+@media (max-width: 820px) {
+  .site-header.is-scrolled {
+    background: rgba(7, 13, 25, .62);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
+  }
+}
+
+
+/* =========================================
+   HARD OVERRIDE: DETAIL SWIPE UP TO TABLET
+   This intentionally overrides older 2-column grid rules.
+========================================= */
+
+@media (max-width: 1024px) {
+
+  .detail-gallery {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 14px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .detail-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .detail-gallery img,
+  .detail-gallery .wide {
+    flex: 0 0 min(78vw, 430px) !important;
+    width: min(78vw, 430px) !important;
+    max-width: none !important;
+    grid-column: auto !important;
+    aspect-ratio: 4 / 5 !important;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .docs-grid,
+  .docs-grid-4,
+  .docs-grid-7 {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 14px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 4px 2px 16px !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .docs-grid::-webkit-scrollbar,
+  .docs-grid-4::-webkit-scrollbar,
+  .docs-grid-7::-webkit-scrollbar {
+    display: none;
+  }
+
+  .doc-page {
+    flex: 0 0 min(72vw, 330px) !important;
+    width: min(72vw, 330px) !important;
+    max-width: 330px !important;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .doc-page img,
+  .doc-page figcaption {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 560px) {
+
+  .detail-gallery img,
+  .detail-gallery .wide {
+    flex-basis: 88% !important;
+    width: 88% !important;
+  }
+
+  .doc-page {
+    flex-basis: 82% !important;
+    width: 82% !important;
+  }
+}
+

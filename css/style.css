@@ -3142,3 +3142,128 @@ main {
   will-change: transform;
 }
 
+
+/* =========================================
+   GLASS NAVBAR ON SCROLL
+========================================= */
+
+.site-header {
+  transition:
+    background .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease,
+    backdrop-filter .35s ease,
+    -webkit-backdrop-filter .35s ease;
+}
+
+.site-header:not(.is-scrolled) {
+  background: rgba(4, 7, 13, .18);
+  border-bottom-color: rgba(255,255,255,.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.site-header.is-scrolled {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(10, 18, 34, .54),
+      rgba(6, 11, 22, .42)
+    );
+  border-bottom-color: rgba(123, 164, 255, .14);
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.18),
+    inset 0 -1px 0 rgba(255,255,255,.025);
+}
+
+/* =========================================
+   PORTFOLIO DETAIL HOVER POLISH
+========================================= */
+
+.detail-gallery img,
+.doc-page img {
+  transition:
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    filter .35s ease,
+    border-color .35s ease,
+    box-shadow .45s ease;
+}
+
+.detail-facts > div {
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    background .3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .detail-gallery img:hover {
+    transform: translateY(-7px) scale(1.018);
+    filter: brightness(1.045) saturate(1.05);
+    box-shadow:
+      0 28px 70px rgba(0,0,0,.42),
+      0 0 34px rgba(79,131,255,.10);
+  }
+
+  .doc-page:hover img {
+    transform: translateY(-8px) scale(1.014);
+    border-color: rgba(89,145,255,.34);
+    filter: brightness(1.04);
+    box-shadow:
+      0 28px 70px rgba(0,0,0,.44),
+      0 0 34px rgba(61,112,230,.12);
+  }
+
+  .detail-facts > div:hover {
+    transform: translateY(-4px);
+    border-color: rgba(91,145,255,.25);
+    background: rgba(48,86,160,.08);
+  }
+}
+
+
+/* Tablet/mobile swipe affordance for opened project galleries */
+@media (max-width: 1024px) {
+  .detail-gallery,
+  .docs-grid {
+    position: relative;
+    padding-bottom: 20px !important;
+  }
+
+  .detail-gallery {
+    mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 92%,
+      rgba(0,0,0,.35) 98%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 92%,
+      rgba(0,0,0,.35) 98%,
+      transparent 100%
+    );
+  }
+
+  .docs-grid {
+    mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 92%,
+      rgba(0,0,0,.35) 98%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 92%,
+      rgba(0,0,0,.35) 98%,
+      transparent 100%
+    );
+  }
+}
+
