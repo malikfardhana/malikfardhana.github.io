@@ -241,3 +241,153 @@ projectCards.forEach((card) => setProjectState(card, false));
 
 /* Default language */
 setLanguage("en");
+
+
+/* =========================================
+   SCROLL DRIVEN GRADIENT BACKGROUND
+========================================= */
+
+const ambientBackground =
+  document.querySelector(".ambient-background");
+
+const blueBlob =
+  document.querySelector(".blob-blue");
+
+const cyanBlob =
+  document.querySelector(".blob-cyan");
+
+const violetBlob =
+  document.querySelector(".blob-violet");
+
+const deepBlob =
+  document.querySelector(".blob-deep");
+
+const gradientMesh =
+  document.querySelector(".gradient-mesh");
+
+
+let gradientTicking = false;
+
+
+function updateGradientBackground() {
+
+  const scrollY =
+    window.scrollY || window.pageYOffset;
+
+
+  /*
+    different speeds create depth / parallax
+  */
+
+  if (blueBlob) {
+
+    blueBlob.style.setProperty(
+      "--blob-y",
+      `${scrollY * 0.06}px`
+    );
+
+    blueBlob.style.setProperty(
+      "--blob-x",
+      `${scrollY * -0.012}px`
+    );
+
+  }
+
+
+  if (cyanBlob) {
+
+    cyanBlob.style.setProperty(
+      "--blob-y",
+      `${scrollY * -0.035}px`
+    );
+
+    cyanBlob.style.setProperty(
+      "--blob-x",
+      `${scrollY * 0.018}px`
+    );
+
+  }
+
+
+  if (violetBlob) {
+
+    violetBlob.style.setProperty(
+      "--blob-y",
+      `${scrollY * -0.055}px`
+    );
+
+    violetBlob.style.setProperty(
+      "--blob-x",
+      `${scrollY * -0.015}px`
+    );
+
+  }
+
+
+  if (deepBlob) {
+
+    deepBlob.style.setProperty(
+      "--blob-y",
+      `${scrollY * -0.028}px`
+    );
+
+  }
+
+
+  if (gradientMesh) {
+
+    gradientMesh.style.setProperty(
+      "--mesh-scroll",
+      `${scrollY * -0.022}px`
+    );
+
+  }
+
+
+  if (ambientBackground) {
+
+    ambientBackground.style.setProperty(
+      "--aurora-scroll",
+      `${scrollY * 0.025}px`
+    );
+
+  }
+
+
+  gradientTicking = false;
+
+}
+
+
+
+/* requestAnimationFrame keeps it smooth */
+
+window.addEventListener(
+  "scroll",
+  () => {
+
+    if (
+      gradientTicking ||
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+    ) {
+      return;
+    }
+
+
+    gradientTicking = true;
+
+
+    requestAnimationFrame(
+      updateGradientBackground
+    );
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+updateGradientBackground();
