@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#161616"/>
+      <stop offset="100%" stop-color="#0b0b0b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="75%" cy="25%" r="55%">
+      <stop offset="0%" stop-color="#2c2c2c"/>
+      <stop offset="100%" stop-color="#111111" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <rect width="100%" height="100%" fill="url(#glow)"/>
+  <rect x="52" y="52" width="976" height="1246" rx="28" fill="none" stroke="#303030" stroke-width="2"/>
+  <circle cx="799" cy="337" r="172" fill="#181818" stroke="#2f2f2f"/>
+  <text x="70" y="985" fill="#f3f3f3" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700">AZKA MANDIRI UMROH</text>
+  <text x="72" y="1066" fill="#808080" font-family="Arial, Helvetica, sans-serif" font-size="24" letter-spacing="3">DETAIL VISUAL 03</text>
+  <text x="72" y="1161" fill="#4f4f4f" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="2">1080 × 1350 / 4:5 FEED FORMAT</text>
+</svg>

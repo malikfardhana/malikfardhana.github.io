@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="1188" viewBox="0 0 840 1188">
+<defs>
+<linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#0b1320"/><stop offset="100%" stop-color="#07090d"/></linearGradient>
+<radialGradient id="g" cx="78%" cy="18%" r="48%"><stop offset="0%" stop-color="#1f4c91"/><stop offset="100%" stop-color="#07101e" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="840" height="1188" fill="url(#bg)"/><rect width="840" height="1188" fill="url(#g)"/>
+<rect x="46" y="46" width="748" height="1096" rx="22" fill="none" stroke="#29466d" stroke-width="2"/>
+<text x="62" y="100" fill="#5e8fdc" font-family="Arial" font-size="22" letter-spacing="4">AZKA MANDIRI UMROH</text>
+<text x="62" y="760" fill="#f5f5f5" font-family="Arial" font-size="52" font-weight="700">ITINERARY UMROH</text>
+<text x="62" y="820" fill="#9fb8df" font-family="Arial" font-size="24">PAGE 06 / 07</text>
+<text x="62" y="1080" fill="#4c6a94" font-family="Arial" font-size="20" letter-spacing="3">A4 PORTFOLIO PLACEHOLDER</text>
+</svg>
